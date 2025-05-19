@@ -176,3 +176,6 @@ cython_debug/
 
 # macOS metadata
 .DS_Store
+
+
+**/*.crc
