@@ -1,0 +1,13 @@
+version: '3.8'
+
+services:
+  pipeline:
+    build: .
+    container_name: assignment1_pipeline
+    volumes:
+      - ./:/app           # Mount your project into the container
+    ports:
+      - "8888:8888"       # Expose JupyterLab on 8888
+    environment:
+      - PYSPARK_PYTHON=python
+    command: ["jupyter", "lab", "--ip=0.0.0.0", "--no-browser", "--allow-root"]
