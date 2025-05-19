@@ -1,7 +1,15 @@
 # utils/ingestion.py
 
-def ingest_raw():
+from pyspark.sql import SparkSession
+
+def ingest_raw(spark: SparkSession, csv_path: str, output_path: str):
     """
-    TODO: read CSVs from data/ and write to datamart/bronze/ as Parquet.
+    Read a raw CSV with schema inference and write it out as Parquet.
     """
-    pass
+    df = (
+        spark.read
+             .option("header", True)
+             .option("inferSchema", True)      # ← add this
+             .csv(csv_path)
+    )
+    df.write.mode("overwrite").parquet(output_path)
